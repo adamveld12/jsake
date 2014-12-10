@@ -1,5 +1,7 @@
 # JSaké
 
+[![Circle CI](https://circleci.com/gh/adamveld12/jsake.svg?style=svg)](https://circleci.com/gh/adamveld12/jsake)
+
 Yet another javascript build tool YAJSBT
 
 This is just a guinea pig project and I don't expect this to take off. 
