@@ -1,24 +1,30 @@
-var should = require('chai').should(),
-    task = require('../index');
+ var chai = require('chai'),
+    jsake = require('../index'),
+    should = chai.should();
 
-describe('#escape', function() {
-  it('converts & into &amp;', function() {
-    escape('&').should.equal('&amp;');
-  });
 
-  it('converts " into &quot;', function() {
-    escape('"').should.equal('&quot;');
-  });
+describe('jsake', function(){
 
-  it('converts \' into &#39;', function() {
-    escape('\'').should.equal('&#39;');
-  });
+    it('has task defined', function(){
+       should.exist(jsake.task);
+       jsake.execute.should.be.a('function');
+    });
 
-  it('converts < into &lt;', function() {
-    escape('<').should.equal('&lt;');
-  });
+    it('task property should be a function', function(){
+      should.exist(jsake.task);
+      jsake.task.should.be.a('function');
+    });
 
-  it('converts > into &gt;', function() {
-    escape('>').should.equal('&gt;');
-  });
+    it('has execute defined', function(){
+      should.exist(jsake.execute);
+    });
+
+    it('execute property should be a function', function(){
+      should.exist(jsake.execute);
+      jsake.execute.should.be.a('function');
+    });
+
+    describe('task function', function(){});
+
+    require('./task.spec')();
 });
