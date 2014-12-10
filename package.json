@@ -1,0 +1,32 @@
+{
+  "name": "jsake",
+  "version": "0.0.0",
+  "description": "Yet another javascript build tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:adamveld12/jsake.git"
+  },
+  "keywords": [
+    "jaske",
+    "\"build",
+    "tool\"",
+    "\"next",
+    "big",
+    "thing\""
+  ],
+  "author": "Adam Veldhousen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adamveld12/jsake/issues"
+  },
+  "homepage": "https://github.com/adamveld12/jsake",
+  "devDependencies": {
+    "should": "~4.3.1",
+    "mocha": "~2.0.1",
+    "chai": "~1.10.0"
+  }
+}
