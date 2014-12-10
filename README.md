@@ -11,7 +11,7 @@ already exists, but it doesn't mean I can't give my own shot at it.
 
 ### Setup
   1. `npm install`
-  2. Run tests with `npm run spec`
+  2. Run tests with `npm test`
 
 ## Use
 
