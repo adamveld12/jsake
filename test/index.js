@@ -1,6 +1,8 @@
  var chai = require('chai'),
     jsake = require('../index'),
-    should = chai.should();
+    should = chai.should(),
+    expect = chai.expect,
+    assert = chai.assert;
 
 
 describe('jsake', function(){
@@ -35,16 +37,77 @@ describe('jsake', function(){
 
 
     describe('register task should', function(){
-      it('throw with undefined name', function(){ });
-      it('throw with undefined callback', function(){ should.exist(jsake.list);
-        jsake.execute.should.be.a('function');
+
+      it('throw with undefined name', function(){ 
+        expect(function(){
+          jsake.task(void 0, function(){})
+        }).to.throw(Error);
       });
-      it('throw with a duplicate name', function(){ });
+
+      it('throw with undefined name', function(){ 
+        expect(function(){
+          jsake.task(void 0, function(){})
+        }).to.throw(Error);
+      });
+
+      it('throw with undefined callback', function(){ 
+        expect(function(){
+          jsake.task('default', void 0)
+        }).to.throw(Error);
+      });
+
       it('succeed with defined name and callback', function(){
-        should.exist(jsake.list);
-        jsake.execute.should.be.a('function');
+        expect(function(){
+          jsake.task('test1', function(){})
+        }).to.not.throw(Error);
       });
+
+      it('throw with a duplicate name', function(){ 
+        expect(function(){
+          jsake.task('default', function(){})
+          jsake.task('default', function(){})
+        }).to.throw(Error);
+      });
+
     });
 
-    require('./task.spec')();
+
+
+  describe('executes the task', function() {
+    before(function(){
+
+      jsake.task('hello', function(){ });
+
+      jsake.task('add', function(a, b){ this.log(a + b); });
+
+      jsake.task('step1', function(){ });
+
+      jsake.task('step2', function(){ });
+
+    });
+
+    it('default', function() {
+      expect(function(){
+        jsake.execute();
+      }).to.not.throw(Error)
+    });
+
+    it('"hello"', function() {
+      expect(function(){
+        jsake.execute('hello');
+      }).to.not.throw(Error);
+    });
+
+    it('"add"', function(){
+      expect(function(){
+        jsake.execute('add', 1, 2);
+      }).to.not.throw(Error);
+    });
+
+
+
+    describe('', function(){});
+
+  });
+
 });

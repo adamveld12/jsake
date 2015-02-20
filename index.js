@@ -2,7 +2,11 @@ var Task = require('./lib/task'),
     taskMap = {};
 
 function executeTask(name){
-  var args = Array.prototype.slice.apply(arguments, 1),
+
+  // default to the 'default' task
+  name = name || "default";
+
+  var args = Array.prototype.slice.call(arguments, 1),
   task = taskMap[name];
 
   if (!task){
@@ -13,13 +17,24 @@ function executeTask(name){
 };
 
 function registerTask(name, callback){
-  if (taskMap[name]){
-    throw new Error("A task named '" + name + "' already exists.");
+
+  if (typeof(name) === "function") {
+    callback = name;
+    name = "default";
   }
 
-  if (!callback){
+  if (taskMap[name])
+    throw new Error("A task named '" + name + "' has already been added.");
+
+  
+  if (!callback)
     throw new Error("A callback must be defined for a Task.");
-  }
+
+  if (typeof(callback) !== "function")
+    throw new Error("The callback must be a function.");
+
+  if (!name) 
+    throw new Error("A name must be defined for this task.");
 
   var task = taskMap[name] = new Task(name, callback);
 
