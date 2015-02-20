@@ -24,7 +24,27 @@ describe('jsake', function(){
       jsake.execute.should.be.a('function');
     });
 
-    describe('task function', function(){});
+    it('has list defined', function(){
+      should.exist(jsake.list);
+    });
+
+    it('list property should be a function', function(){
+      should.exist(jsake.list);
+      jsake.execute.should.be.a('function');
+    });
+
+
+    describe('register task should', function(){
+      it('throw with undefined name', function(){ });
+      it('throw with undefined callback', function(){ should.exist(jsake.list);
+        jsake.execute.should.be.a('function');
+      });
+      it('throw with a duplicate name', function(){ });
+      it('succeed with defined name and callback', function(){
+        should.exist(jsake.list);
+        jsake.execute.should.be.a('function');
+      });
+    });
 
     require('./task.spec')();
 });
