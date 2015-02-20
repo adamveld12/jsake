@@ -78,8 +78,6 @@ describe('jsake', function(){
 
       jsake.task('hello', function(){ });
 
-      jsake.task('add', function(a, b){ this.log(a + b); });
-
       jsake.task('step1', function(){ });
 
       jsake.task('step2', function(){ });
@@ -98,16 +96,27 @@ describe('jsake', function(){
       }).to.not.throw(Error);
     });
 
-    it('"add"', function(){
-      expect(function(){
-        jsake.execute('add', 1, 2);
-      }).to.not.throw(Error);
-    });
-
-
-
-    describe('', function(){});
 
   });
+
+  describe('and passes arguments', function(){
+    before(function(){
+      jsake.task('add', function(a, b){
+        a.should.be.a('Number');
+        b.should.be.a('Number');
+
+        a.should.equal(1);
+        b.should.equal(2);
+
+        (a + b).should.equal(3);
+      });
+    });
+
+    it('1, 2 to the task "add"', function(){
+      jsake.execute('add', 1, 2);
+    });
+
+  })
+
 
 });

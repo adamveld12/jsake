@@ -13,7 +13,9 @@ function executeTask(name){
     throw new Error("No task for '" + name + "' defined.");
   }
 
-  task.execute(args);
+  task.execute.apply(task, args);
+  // return a status code for every task execution so we can signal errors
+  return 0;
 };
 
 function registerTask(name, callback){
