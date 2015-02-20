@@ -7,10 +7,7 @@
 
 Yet another javascript build tool YAJSBT
 
-This is just a guinea pig project and I don't expect this to take off. 
-I just want an imperative and simple task runner in JS that doesn't need
-plugins or other nonsense to use. Something that fits this bill probably
-already exists, but it doesn't mean I can't give my own shot at it.
+This is me letting out my frustrations with grunt/gulp, their plugin wrappers (that are slow to be updates in some cases) for all of my favorite js libs, and the need to remove a lot of the boilerplate I sometimes write when I opt for  [NPM as a build tool](http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/). I wanted something that felt like [Rake](https://github.com/ruby/rake) but with a bit more simplicity. Something that fits this role probably already exists, but I am too lazy to look and my JS Skillz are a bit rusty and I need an excuse to write code.
 
 ## How to build
 
@@ -20,53 +17,36 @@ already exists, but it doesn't mean I can't give my own shot at it.
 
 ## Hit the ground running
 
-install jsake globally
-```sh
-  npm install -g jsake
-```
-
-Create a jakefile in your root:
-```sh
-  touch jakefile
-```
-
 Register some tasks like so:
 ```js
   var make = require("jsake");
 
+	// if no name is defined, the function is registered as 'default'
   make.task(function(){
+    this.log("echo hello world");
+  }).describe("Prints hello world to the console.");
+
+	// register a task with the name 'ls'
+  make.task("ls", function(){
     this.sh("ls");
   }).describe("Prints the files in the current working directory.");
 ```
 
-You can now run the file from the command line:
-```sh
-  jake
-```
-
-You can also run this programmatically:
+You can run tasks programmatically:
 ```js
-  make.execute("default");
-``` 
+	// execute the default task
+  make.execute();
 
-There is a built in help task that will print all of the task's descriptions for you.
-```sh
-  jake --help
-```
+	// execute our ls task
+  make.execute("ls");
 
-Or print them programmatically:
-```js 
+  // Print the task descriptions to std out
   make.help();
 ```
 
 ## Contributing changes
 
 Please feel free to open issues and pull requests. Everyone's code is welcome with open arms.
-
-The workflow I would like to use is defined as follows:
-
-master is _always_ stable. This means that active development happens on the development branch,
-and pull requests will go there first. 
 
 ## License
   MIT license, feel free to do any horrible or fantastic thing you want with this code
