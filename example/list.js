@@ -5,4 +5,4 @@ make.task("default", function(){
 }).describe("Prints the files in the current working directory.");
 
 make.execute("default");
-make.help();
+console.log(make.help());

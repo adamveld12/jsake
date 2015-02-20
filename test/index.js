@@ -69,54 +69,94 @@ describe('jsake', function(){
         }).to.throw(Error);
       });
 
+
+      describe('return task api', function(){
+        var taskApi = jsake.task('describetest', function(){});
+
+        it('that has description defined', function(){
+          should.exist(taskApi.description);
+        });
+
+        it('that has describe defined', function(){
+          should.exist(taskApi.describe);
+        });
+
+        it('describe throws if passed an array', function(){
+          expect(function(){ taskApi.describe([]); }).to.throw(Error);
+        });
+
+        it('describe throws if passed an object', function(){
+          expect(function(){ taskApi.describe({}); }).to.throw(Error);
+        });
+
+        it('describe throws if passed a Number', function(){
+          expect(function(){ taskApi.describe(1); }).to.throw(Error);
+        });
+
+        it('describe throws if passed a function', function(){
+          expect(function(){ taskApi.describe(function(){}); }).to.throw(Error);
+        });
+
+        it('describe should not throw if string', function(){
+          expect(function(){
+            taskApi.describe('this is a test task');
+          }).to.not.throw(Error);
+        });
+
+        it('describe should set description text', function(){
+          var text = 'this is a test string';
+          expect(function(){
+            taskApi.describe(text);
+          }).to.not.throw(Error);
+          taskApi.description().should.equal("describetest: " + text);
+        });
+
+      });
+
     });
 
-
-
-  describe('executes the task', function() {
+  describe('executes task should', function() {
     before(function(){
-
       jsake.task('hello', function(){ });
-
       jsake.task('step1', function(){ });
-
       jsake.task('step2', function(){ });
-
     });
 
-    it('default', function() {
+    it('execute default with no arguments', function() {
       expect(function(){
         jsake.execute();
       }).to.not.throw(Error)
     });
 
-    it('"hello"', function() {
+    it('should execute "hello" without errors', function() {
       expect(function(){
         jsake.execute('hello');
       }).to.not.throw(Error);
     });
+    it('should throw error when executing unregistered task', function() {
+      expect(function(){
+        jsake.execute('no task defined for me');
+      }).to.throw(Error);
+    });
 
+    describe('pass arguments', function(){
+      before(function(){
+        jsake.task('add', function(a, b){
+          a.should.be.a('Number');
+          b.should.be.a('Number');
 
-  });
+          a.should.equal(1);
+          b.should.equal(2);
 
-  describe('and passes arguments', function(){
-    before(function(){
-      jsake.task('add', function(a, b){
-        a.should.be.a('Number');
-        b.should.be.a('Number');
+          (a + b).should.equal(3);
+        });
+      });
 
-        a.should.equal(1);
-        b.should.equal(2);
-
-        (a + b).should.equal(3);
+      it('1, 2 to the task "add"', function(){
+        jsake.execute('add', 1, 2);
       });
     });
-
-    it('1, 2 to the task "add"', function(){
-      jsake.execute('add', 1, 2);
-    });
-
-  })
+  });
 
 
 });

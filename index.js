@@ -2,7 +2,6 @@ var Task = require('./lib/task'),
     taskMap = {};
 
 function executeTask(name){
-
   // default to the 'default' task
   name = name || "default";
 
@@ -14,6 +13,7 @@ function executeTask(name){
   }
 
   task.execute.apply(task, args);
+
   // return a status code for every task execution so we can signal errors
   return 0;
 };
@@ -28,7 +28,6 @@ function registerTask(name, callback){
   if (taskMap[name])
     throw new Error("A task named '" + name + "' has already been added.");
 
-  
   if (!callback)
     throw new Error("A callback must be defined for a Task.");
 
@@ -46,16 +45,21 @@ function registerTask(name, callback){
 
 function listTasks() {
   var vals = [];
-  for (var task in taskMap){
-    vals.push(task.description());
+  for (var taskName in taskMap){
+    vals.push(taskMap[taskName].description());
   }
   return vals;
+};
+
+function helpPrint(){
+  return listTasks().join("\n");
 };
 
 module.exports = {
   execute: executeTask,
   task: registerTask,
   list: listTasks,
+  help: helpPrint,
   //concurrent: concurrentTask,
   //directory: directoryTask,
 };
