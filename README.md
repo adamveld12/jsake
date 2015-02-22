@@ -7,7 +7,7 @@
 
 Yet another javascript build tool YAJSBT
 
-This is me letting out my frustrations with grunt/gulp, their plugin wrappers (that are slow to be updates in some cases) for all of my favorite js libs, and the need to remove a lot of the boilerplate I sometimes write when I opt for  [NPM as a build tool](http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/). I wanted something that felt like [Rake](https://github.com/ruby/rake) but with a bit more simplicity. Something that fits this role probably already exists, but I am too lazy to look and my JS Skillz are a bit rusty and I need an excuse to write code.
+Because I needed an excuse to write some javascript.
 
 ## How to build
 
@@ -17,40 +17,38 @@ This is me letting out my frustrations with grunt/gulp, their plugin wrappers (t
 
 ## Hit the ground running
 
+Install it globally 
+```sh
+npm install -g jsake
+```
+
+get some help
+```sh
+jsake --help # -h
+```
+
 Register some tasks like so:
 ```js
-var make = require("jsake");
-
 // if no name is defined, the function is registered as 'default'
-make.task(function(){
+task(function(){
 	this.log("echo hello world");
 }).describe("Prints hello world to the console.");
 
 // tasks can take arguments
-make.task(function(a, b){
+task("add", function(a, b){
 	this.log(a + b);
 }).describe("Takes two numbers and adds them");
 
 // register a task with the name 'ls'
-make.task("ls", function(){
+task("ls", function(){
 	// shell commands are ran synchronously
 	this.sh("ls");
 }).describe("Prints the files in the current working directory.");
 ```
 
-You can run tasks programmatically:
-```js
-// execute the default task
-make.execute();
-
-// execute our ls task
-make.execute("ls");
-
-// pass some arguments
-make.execute("add", 1, 2);
-
-// Print the task descriptions to std out
-make.help();
+execute a task:
+```sh
+jsake add 1 2
 ```
 
 ## Contributing changes
@@ -58,4 +56,5 @@ make.help();
 Please feel free to open issues and pull requests. Everyone's code is welcome with open arms.
 
 ## License
+
   MIT license, feel free to do any horrible or fantastic thing you want with this code
