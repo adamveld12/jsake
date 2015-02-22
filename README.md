@@ -19,38 +19,38 @@ This is me letting out my frustrations with grunt/gulp, their plugin wrappers (t
 
 Register some tasks like so:
 ```js
-  var make = require("jsake");
+var make = require("jsake");
 
-	// if no name is defined, the function is registered as 'default'
-  make.task(function(){
-    this.log("echo hello world");
-  }).describe("Prints hello world to the console.");
+// if no name is defined, the function is registered as 'default'
+make.task(function(){
+	this.log("echo hello world");
+}).describe("Prints hello world to the console.");
 
-	// tasks can take arguments
-  make.task(function(a, b){
-    this.log(a + b);
-  }).describe("Takes two numbers and adds them");
+// tasks can take arguments
+make.task(function(a, b){
+	this.log(a + b);
+}).describe("Takes two numbers and adds them");
 
-	// register a task with the name 'ls'
-  make.task("ls", function(){
-		// shell commands are ran synchronously, so you don't have to enter callback hell.
-    this.sh("ls");
-  }).describe("Prints the files in the current working directory.");
+// register a task with the name 'ls'
+make.task("ls", function(){
+	// shell commands are ran synchronously
+	this.sh("ls");
+}).describe("Prints the files in the current working directory.");
 ```
 
 You can run tasks programmatically:
 ```js
-	// execute the default task
-  make.execute();
+// execute the default task
+make.execute();
 
-	// execute our ls task
-  make.execute("ls");
+// execute our ls task
+make.execute("ls");
 
-	// pass some arguments
-  make.execute("add", 1, 2);
+// pass some arguments
+make.execute("add", 1, 2);
 
-  // Print the task descriptions to std out
-  make.help();
+// Print the task descriptions to std out
+make.help();
 ```
 
 ## Contributing changes

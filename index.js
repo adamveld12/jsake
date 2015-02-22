@@ -25,6 +25,9 @@ function registerTask(name, callback){
     name = "default";
   }
 
+  if (!name) 
+    throw new Error("A name must be defined for this task.");
+
   if (taskMap[name])
     throw new Error("A task named '" + name + "' has already been added.");
 
@@ -34,13 +37,21 @@ function registerTask(name, callback){
   if (typeof(callback) !== "function")
     throw new Error("The callback must be a function.");
 
-  if (!name) 
-    throw new Error("A name must be defined for this task.");
 
   var task = taskMap[name] = new Task(name, callback);
 
   // returns a public api for adding metadata onto a task
   return task.api();
+};
+
+function directoryTask(name){
+  if (!name) 
+    throw new Error("A name must be defined for this task.");
+
+  if (taskMap[name])
+    throw new Error("A task named '" + name + "' has already been added.");
+
+  fs.mkdirSync(name);
 };
 
 function listTasks() {
@@ -58,8 +69,8 @@ function helpPrint(){
 module.exports = {
   execute: executeTask,
   task: registerTask,
+  directory: directoryTask,
   list: listTasks,
   help: helpPrint,
   //concurrent: concurrentTask,
-  //directory: directoryTask,
 };

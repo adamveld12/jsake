@@ -1,6 +1,6 @@
 {
   "name": "jsake",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "description": "Yet another javascript build tool",
   "main": "index.js",
   "scripts": {
@@ -11,12 +11,9 @@
     "url": "git@github.com:adamveld12/jsake.git"
   },
   "keywords": [
-    "jaske",
-    "\"build",
-    "tool\"",
-    "\"next",
-    "big",
-    "thing\""
+    "jsake",
+    "build tool",
+    "next big thing"
   ],
   "author": "Adam Veldhousen",
   "license": "MIT",
@@ -27,5 +24,9 @@
   "devDependencies": {
     "mocha": "~2.0.1",
     "chai": "~1.10.0"
+  },
+  "preferGlobal": "true",
+  "bin": {
+    "jsake" : "bin/cli.js"
   }
 }
