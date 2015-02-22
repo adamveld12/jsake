@@ -44,15 +44,6 @@ function registerTask(name, callback){
   return task.api();
 };
 
-function directoryTask(name){
-  if (!name) 
-    throw new Error("A name must be defined for this task.");
-
-  if (taskMap[name])
-    throw new Error("A task named '" + name + "' has already been added.");
-
-  fs.mkdirSync(name);
-};
 
 function listTasks() {
   var vals = [];
@@ -66,11 +57,14 @@ function helpPrint(){
   return listTasks().join("\n");
 };
 
-module.exports = {
+var api = {
   execute: executeTask,
   task: registerTask,
-  directory: directoryTask,
   list: listTasks,
   help: helpPrint,
   //concurrent: concurrentTask,
 };
+
+require("./lib/plugins").extend(api);
+
+module.exports = api;

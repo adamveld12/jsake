@@ -9,12 +9,22 @@ describe('jsake', function(){
 
     it('has task defined', function(){
        should.exist(jsake.task);
-       jsake.execute.should.be.a('function');
+       jsake.task.should.be.a('function');
     });
 
     it('task property should be a function', function(){
       should.exist(jsake.task);
       jsake.task.should.be.a('function');
+    });
+
+    it('has directory defined', function(){
+       should.exist(jsake.directory);
+       jsake.directory.should.be.a('function');
+    });
+
+    it('directory property should be a function', function(){
+      should.exist(jsake.directory);
+      jsake.directory.should.be.a('function');
     });
 
     it('has execute defined', function(){
@@ -35,14 +45,7 @@ describe('jsake', function(){
       jsake.execute.should.be.a('function');
     });
 
-
     describe('register task should', function(){
-
-      it('throw with undefined name', function(){ 
-        expect(function(){
-          jsake.task(void 0, function(){})
-        }).to.throw(Error);
-      });
 
       it('throw with undefined name', function(){ 
         expect(function(){
@@ -133,6 +136,7 @@ describe('jsake', function(){
         jsake.execute('hello');
       }).to.not.throw(Error);
     });
+
     it('should throw error when executing unregistered task', function() {
       expect(function(){
         jsake.execute('no task defined for me');
