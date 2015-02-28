@@ -1,8 +1,7 @@
  var chai = require('chai'),
     jsake = require('../index'),
     should = chai.should(),
-    expect = chai.expect,
-    assert = chai.assert;
+    expect = chai.expect;
 
 
 describe('jsake', function(){
@@ -47,28 +46,28 @@ describe('jsake', function(){
 
     describe('register task should', function(){
 
-      it('throw with undefined name', function(){ 
+      it('throw with undefined name', function(){
         expect(function(){
-          jsake.task(void 0, function(){})
+          jsake.task(void 0, function(){});
         }).to.throw(Error);
       });
 
-      it('throw with undefined callback', function(){ 
+      it('throw with undefined callback', function(){
         expect(function(){
-          jsake.task('default', void 0)
+          jsake.task('default', void 0);
         }).to.throw(Error);
       });
 
       it('succeed with defined name and callback', function(){
         expect(function(){
-          jsake.task('test1', function(){})
+          jsake.task('test1', function(){});
         }).to.not.throw(Error);
       });
 
-      it('throw with a duplicate name', function(){ 
+      it('throw with a duplicate name', function(){
         expect(function(){
-          jsake.task('default', function(){})
-          jsake.task('default', function(){})
+          jsake.task('default', function(){});
+          jsake.task('default', function(){});
         }).to.throw(Error);
       });
 
@@ -128,7 +127,7 @@ describe('jsake', function(){
     it('execute default with no arguments', function() {
       expect(function(){
         jsake.execute();
-      }).to.not.throw(Error)
+      }).to.not.throw(Error);
     });
 
     it('should execute "hello" without errors', function() {

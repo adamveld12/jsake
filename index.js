@@ -25,7 +25,7 @@ function registerTask(name, callback){
     name = "default";
   }
 
-  if (!name) 
+  if (!name)
     throw new Error("A name must be defined for this task.");
 
   if (taskMap[name])
@@ -36,7 +36,6 @@ function registerTask(name, callback){
 
   if (typeof(callback) !== "function")
     throw new Error("The callback must be a function.");
-
 
   var task = taskMap[name] = new Task(name, callback);
 
@@ -62,7 +61,6 @@ var api = {
   task: registerTask,
   list: listTasks,
   help: helpPrint,
-  //concurrent: concurrentTask,
 };
 
 require("./lib/plugins").extend(api);
